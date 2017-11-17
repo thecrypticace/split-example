@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class Bug extends Command
 {
-    protected $signature = 'bug {count?}';
+    protected $signature = 'bug {count?} {--wrong} {--correct}';
     protected $description = 'Command description';
 
     public function handle()
@@ -27,6 +27,14 @@ class Bug extends Command
             // the length of the array we can skip it
             for ($j = 1; $j <= $i; $j++) {
                 $groups = $collection->split($j)->count();
+
+                if ($this->option("wrong") && $groups === $j) {
+                    continue;
+                }
+                
+                if ($this->option("correct") && $groups !== $j) {
+                    continue;
+                }
 
                 $this->output->writeln(vsprintf($format, [
                     $i,
