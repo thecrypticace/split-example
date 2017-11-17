@@ -12,7 +12,7 @@ class Bug extends Command
     public function handle()
     {
         $testCount = (int) (
-            $this->argument("count") ?: $this->ask("How many examples do you want to show?", 10)   
+            $this->argument("count") ?: $this->ask("How many examples do you want to show?", 10)
         );
 
         $length = strlen($testCount);
